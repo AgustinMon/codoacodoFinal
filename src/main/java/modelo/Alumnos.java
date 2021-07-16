@@ -10,11 +10,12 @@ package modelo;
  * @author Agustin
  */
 public class Alumnos {
-    private int id;
+    private Integer id;
     private String nombre;
     private String apellido;
     private String email;
     
+    //no es publica, esta dentro del ambito de su paquete
     Alumnos(int id, String nombre, String apellido, String email){
         this.id = id;
         this.apellido = apellido;
@@ -22,12 +23,16 @@ public class Alumnos {
         this.email = email;
     }
     
+    // publica para instanciar desde el controlador
+    public Alumnos(){
+        
+    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

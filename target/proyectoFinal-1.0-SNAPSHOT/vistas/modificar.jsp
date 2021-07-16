@@ -36,11 +36,12 @@
         <div class="container">
             <h1>Modificar Alumno:</h1>
 
-            <form>
+            <form action="../controlador/?accion=modificar" method="post">
                 <div class="mb-3">
-                    <label for="id" class="form-label">id</label>
                     <input type="hidden" class="form-control" name="id" id="id" value="<% out.print(resultado.getId());%>"/>
 
+                    <input type="hidden" class="form-control" name="tipo" id="tipo" value="modificar"/>
+                    
                     <label for="email" class="form-label">email:</label>
                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="<% out.print(resultado.getEmail());%>"/>
 

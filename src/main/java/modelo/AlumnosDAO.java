@@ -79,8 +79,8 @@ public class AlumnosDAO {
         Boolean b = false;
      
         try{
-            ps = c.prepareStatement("INSERT INTO alumnos (nombre, apellido, email);"
-                    + "VALUES (?,?,?)");
+            ps = c.prepareStatement("INSERT INTO alumnos (id, nombre, apellido, email)"
+                    + " VALUES (NULL,?,?,?);");
             ps.setString(1, alumno.getNombre());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getEmail());
@@ -131,7 +131,7 @@ public class AlumnosDAO {
      
         try{
             ps = c.prepareStatement("DELETE FROM alumnos WHERE id = ?;");
-            ps.setInt(4, _id);
+            ps.setInt(1, _id);
             if(ps.execute()){
                b = true; 
             }

@@ -20,16 +20,18 @@
         <div class="container">
             <h1>Nuevo Alumno:</h1>
 
-            <form>
+            <form action="../controlador/?accion=insertar" method="post">
                 <div class="mb-3">
+                    <input type="hidden" class="form-control" name="tipo" id="tipo" value="insertar"/>
+                    
                     <label for="email" class="form-label">email:</label>
-                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"/>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" required/>
 
                     <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" name="nombre" id="nombre"/>
+                    <input type="text" class="form-control" name="nombre" id="nombre" required/>
 
                     <label for="apellido" class="form-label">Apellido:</label>
-                    <input type="text" class="form-control" name="apellido" id="apellido"/>
+                    <input type="text" class="form-control" name="apellido" id="apellido" required/>
 
                 </div>
                 <button class="btn btn-primary" type="submit"> Anadir</button>

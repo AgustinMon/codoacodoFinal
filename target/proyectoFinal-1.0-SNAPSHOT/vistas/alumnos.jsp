@@ -43,10 +43,12 @@
                         <td> <%= resultado.get(i).getId()%>  </td>
                         <td> <%= resultado.get(i).getNombre()%>  </td> 
                         <td> <%= resultado.get(i).getApellido()%>  </td>
-                        <td><a href="modificar.jsp?id=<%= resultado.get(i).getId()%>"> Modificar </a></td>
-                        <td><a href="modificar.jsp?id=<%= resultado.get(i).getId()%>"> Eliminar </a></td>
+                        <td><a href="../controlador/?accion=modificar&id=<%= resultado.get(i).getId()%>"> Modificar </a></td>
+                        <td><a href="../controlador/?accion=eliminar&id=<%= resultado.get(i).getId()%>"> Eliminar </a></td>
                     </tr>
                     <%  }%>
+                    
+                <a href="nuevo.jsp">Añadir alumno</a>
                 </tbody>
             </table>
         </div>
