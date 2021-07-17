@@ -1,0 +1,113 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 16, 2021, 4:32:03 PM
+    Author     : Agustin
+*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+:root {
+  --fondo: #1e90ff;
+  --white: #ffffff;
+  --grisoscuro: #333;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul li{
+      display:inline-block;
+      margin-left: 15px;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover{
+    color:#fff;
+}
+table{
+    width:90%;
+}
+
+h1{
+    text-align: center;
+}
+#menubar{
+    position:relative;
+    top: 0px;
+    height: 80px;
+    background-color: var(--grisoscuro);
+    width:100%;
+    color: #ffffff;
+}
+
+#logo{
+    height:50px;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    height:100%;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card{
+  background-color: #fff;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin: 10px;
+  min-height:300px;
+}
+
+#footer{
+    position:relative;
+    clear: both;
+    height: 200px;
+    background-color: var(--grisoscuro);
+    width:100%;
+    color: #ffffff;
+}
+
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 2fr;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

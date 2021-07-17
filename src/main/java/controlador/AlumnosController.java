@@ -49,7 +49,7 @@ public class AlumnosController extends HttpServlet {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="expanded" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -73,21 +73,28 @@ public class AlumnosController extends HttpServlet {
                 if (accion.equals("modificar")) {
                     String id = request.getParameter("id");
                     alumnosdao.mostrarAlumno(Integer.parseInt(id));
-                    dispatcher = request.getRequestDispatcher("/vistas/modificar.jsp?id="+id);
+                    dispatcher = request.getRequestDispatcher("/vistas/modificar.jsp?accion=modificar&id=" + id);
                     dispatcher.forward(request, response);
                 } else if (accion.equals("nuevo")) {
                     dispatcher = request.getRequestDispatcher("/vistas/nuevo.jsp");
                     dispatcher.forward(request, response);
-                } else if (accion.equals("eliminar")) {
-                    out.print("Sorry UserName or Password Error!"); 
+                } else if (accion.equals("ver")) {
                     String id = request.getParameter("id");
                     alumnosdao.mostrarAlumno(Integer.parseInt(id));
-                    dispatcher = request.getRequestDispatcher("/vistas/eliminar.jsp?id="+id);
+                    dispatcher = request.getRequestDispatcher("/vistas/modificar.jsp?accion=ver&id=" + id);
                     dispatcher.forward(request, response);
-                } 
-                //casos como eliminado o modificado
-                else { 
-                    dispatcher = request.getRequestDispatcher("/vistas/alumnos.jsp");
+                } else if (accion.equals("eliminar")) {
+                    String id = request.getParameter("id");
+                    alumnosdao.mostrarAlumno(Integer.parseInt(id));
+                    dispatcher = request.getRequestDispatcher("/vistas/eliminar.jsp?id=" + id);
+                    dispatcher.forward(request, response);
+                } else if (accion.equals("listar")) {
+                    String tipo = request.getParameter("tipo");
+                    dispatcher = request.getRequestDispatcher("/vistas/listar.jsp?tipo="+tipo);
+                    dispatcher.forward(request, response);
+                } //casos como eliminado o modificado
+                else {
+                    dispatcher = request.getRequestDispatcher("/vistas/listar.jsp");
                     dispatcher.forward(request, response);
                 }
 
@@ -114,46 +121,43 @@ public class AlumnosController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-            AlumnosDAO alumnosdao = new AlumnosDAO();
-            String tipo;
-            RequestDispatcher dispatcher = null;
-            tipo = request.getParameter("tipo");
-            if (tipo.equals("eliminar")){
-                String id = request.getParameter("id");
-                alumnosdao.borrarAlumno(Integer.parseInt(id));
-            }
-            else if (tipo.equals("modificar")){
-                String id = request.getParameter("id");
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                String email = request.getParameter("email");
-                
-                Alumnos alumno = new Alumnos();
-                alumno.setApellido(apellido);
-                alumno.setEmail(email);
-                alumno.setNombre(nombre);
-                alumno.setId(Integer.parseInt(id));
-                alumnosdao.actualizarAlumno(alumno);
-            }
-            else if (tipo.equals("insertar")){
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                String email = request.getParameter("email");
-                
-                Alumnos alumno = new Alumnos();
-                alumno.setApellido(apellido);
-                alumno.setEmail(email);
-                alumno.setNombre(nombre);
-                alumno.setId(null);
-                alumnosdao.insertarAlumno(alumno);
-            }
-            else{
-                System.out.println(tipo);
-            }
-            
-            dispatcher = request.getRequestDispatcher("/vistas/alumnos.jsp");
-            dispatcher.forward(request, response);
+
+        AlumnosDAO alumnosdao = new AlumnosDAO();
+        String tipo;
+        RequestDispatcher dispatcher = null;
+        tipo = request.getParameter("tipo");
+        if (tipo.equals("eliminar")) {
+            String id = request.getParameter("id");
+            alumnosdao.borrarAlumno(Integer.parseInt(id));
+        } else if (tipo.equals("modificar")) {
+            String id = request.getParameter("id");
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String email = request.getParameter("email");
+
+            Alumnos alumno = new Alumnos();
+            alumno.setApellido(apellido);
+            alumno.setEmail(email);
+            alumno.setNombre(nombre);
+            alumno.setId(Integer.parseInt(id));
+            alumnosdao.actualizarAlumno(alumno);
+        } else if (tipo.equals("insertar")) {
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String email = request.getParameter("email");
+
+            Alumnos alumno = new Alumnos();
+            alumno.setApellido(apellido);
+            alumno.setEmail(email);
+            alumno.setNombre(nombre);
+            alumno.setId(null);
+            alumnosdao.insertarAlumno(alumno);
+        } else {
+            System.out.println(tipo);
+        }
+
+        dispatcher = request.getRequestDispatcher("/vistas/alumnos.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**

@@ -38,8 +38,10 @@ public class AlumnosDAO {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
-                
-                Alumnos a = new Alumnos(id, nombre, apellido, email);
+                String anyo = rs.getString("anyo");
+                String carrera = rs.getString("carrera");
+                String telefono = rs.getString("telefono");                 
+                Alumnos a = new Alumnos(id, nombre, apellido, email, anyo, carrera, telefono);
                 lista.add(a);
             }
             return lista;
@@ -63,8 +65,11 @@ public class AlumnosDAO {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
-                String email = rs.getString("email");               
-                alumno = new Alumnos(id, nombre, apellido, email);
+                String email = rs.getString("email");
+                String anyo = rs.getString("anyo");
+                String carrera = rs.getString("carrera");
+                String telefono = rs.getString("telefono");                 
+                alumno = new Alumnos(id, nombre, apellido, email, anyo, carrera, telefono);
             }
             return alumno;
         }
@@ -79,11 +84,14 @@ public class AlumnosDAO {
         Boolean b = false;
      
         try{
-            ps = c.prepareStatement("INSERT INTO alumnos (id, nombre, apellido, email)"
-                    + " VALUES (NULL,?,?,?);");
+            ps = c.prepareStatement("INSERT INTO alumnos (id, nombre, apellido, email, carrera, anyo, telefono)"
+                    + " VALUES (NULL,?,?,?,?,?,?);");
             ps.setString(1, alumno.getNombre());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getEmail());
+            ps.setInt(4, Integer.parseInt(alumno.getAnyo()));
+            ps.setString(5, alumno.getCarrera());
+            ps.setString(6, alumno.getTelefono());              
             if(ps.execute()){
                b = true; 
             }
@@ -104,11 +112,16 @@ public class AlumnosDAO {
         Boolean b = false;
      
         try{
-            ps = c.prepareStatement("UPDATE alumnos SET (nombre = ?,"
-                    + " apellido = ?, email = ?) WHERE id = ?;");
+            ps = c.prepareStatement("UPDATE `alumnos` SET `nombre` = ?,"
+                    + " `apellido` = ?, `email` = ? "
+                    + " `anyo` = ?, `carrera` = ?, `telefono` = ? "
+                    + " WHERE `id` = ?;");
             ps.setString(1, alumno.getNombre());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getEmail());
+            ps.setInt(4, Integer.parseInt(alumno.getAnyo()));
+            ps.setString(5, alumno.getCarrera());
+            ps.setString(6, alumno.getTelefono());            
             ps.setInt(4, alumno.getId());
             if(ps.execute()){
                b = true; 
