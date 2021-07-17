@@ -26,6 +26,7 @@
             String path = request.getContextPath();
             String _id = request.getParameter("id");
             String _accion = request.getParameter("accion");
+            String _tipo = request.getParameter("tipo");
             String _readonly;
             
             int id;
@@ -54,7 +55,7 @@
             %>    
 
 
-            <form action="../controlador/?accion=modificado" method="post">
+            <form action="<%= request.getContextPath() %>/controlador/?accion=modificado&tipo=<%= _tipo %>" method="post">
                 <div class="mb-3">
                     <input type="hidden" class="form-control" name="id" id="id" value="<% out.print(resultado.getId());%>"/>
 

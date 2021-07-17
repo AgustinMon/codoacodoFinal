@@ -9,7 +9,7 @@ package modelo;
  *
  * @author Agustin
  */
-public class Profesores {
+public class Personas {
     private Integer id;
     private String nombre;
     private String apellido;
@@ -19,7 +19,7 @@ public class Profesores {
     private String telefono;
     
     //no es publica, esta dentro del ambito de su paquete
-    Profesores(int id, String nombre, String apellido, String email, String anyo, String carrera, String telefono){
+    Personas(int id, String nombre, String apellido, String email, String anyo, String carrera, String telefono){
         this.id = id;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -30,7 +30,7 @@ public class Profesores {
     }
     
     // publica para instanciar desde el controlador
-    public Profesores(){
+    public Personas(){
         
     }
 

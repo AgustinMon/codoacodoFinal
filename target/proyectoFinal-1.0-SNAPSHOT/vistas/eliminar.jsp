@@ -32,18 +32,16 @@
             AlumnosDAO alumno = new AlumnosDAO();
             resultado = alumno.mostrarAlumno(id);
         %>
-        <p><% out.print(path);%></p>
-        <p><% out.print(id);%></p>
-        
-        <div class="container">
+
+        <div class="container altura">
             <h1>Eliminar Alumno:</h1>
             <h2>Atención, se eliminará el siguiente alumno: </h2>
             <form action="../controlador/?accion=eliminado" method="post">
                 <div class="mb-3">
                     <input type="hidden" class="form-control" name="id" id="id" value="<% out.print(resultado.getId());%>"/>
-                    
+
                     <input type="hidden" class="form-control" name="tipo" id="tipo" value="eliminar"/>
-                    
+
                     <label for="email" class="form-label">email:</label>
                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="<% out.print(resultado.getEmail());%>"/>
 
@@ -54,9 +52,9 @@
                     <input type="text" class="form-control" name="apellido" id="apellido" value="<% out.print(resultado.getApellido());%>"/>
 
                 </div>
-                <button class="btn btn-primary" type="submit">Confirmar</button>
+                <button class="btn btn-danger float-right" type="submit">Confirmar</button>
             </form>
         </div>
-                    <%@ include file="../common-html/footer.jsp" %>
+        <%@ include file="../common-html/footer.jsp" %>
     </body>
 </html>

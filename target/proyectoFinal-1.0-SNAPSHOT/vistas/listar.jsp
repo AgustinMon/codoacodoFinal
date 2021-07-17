@@ -27,10 +27,23 @@
     </head>
     <body>
         <%@ include file="../common-html/menu.jsp" %>
-        <h1>Listado de <%= _tipo %></h1>
-        <a class="btn btn-primary" href="nuevo.jsp&tipo=alumno">Añadir alumno</a>
-        <a class="btn btn-primary" href="nuevo.jsp&tipo=profesor">Añadir profesor</a>
-        <div class="container">
+        <div class="container altura">
+            <h1>Listado de <%= _tipo %></h1>
+            <%                            
+                    if(_tipo.equals("profesor")){
+            %>
+            <a class="btn btn-primary mb-3 float-right" href="?accion=nuevo&tipo=profesor">Añadir profesor</a>
+            <%
+                } 
+            %>
+            <%                            
+                    if(_tipo.equals("alumno")){
+            %>
+            <a class="btn btn-primary mb-3 float-right" href="?accion=nuevo&tipo=alumno">Añadir alumno</a>
+            <%
+                } 
+            %>
+
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -44,31 +57,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%
-                        if(_tipo.equals("profesor")){
+                    <%                            
+                    if(_tipo.equals("profesor")){
                             List<Profesores> resultado = null;
                             ProfesoresDAO profesor = new ProfesoresDAO();
-                            resultado = profesor.listarProfesores();                       
-                        }
-                        else if(_tipo.equals("alumno")){
-                            List<Alumnos> resultado = null;
-                            AlumnosDAO alumno = new AlumnosDAO();
-                            resultado = alumno.listarAlumnos();
-                        }
-
+                            resultado = profesor.listarProfesores();
+                    
                         for (int i = 0; i < resultado.size(); i++) {
-                    %>      
+                    %>
                     <tr>
                         <th scope="row">  <%= resultado.get(i).getId()%>  </th>
-                        <td><i class="fas fa-user-graduate"></i></td>
+                        <td><i class="fas fa-chalkboard-teacher"></i></td>
                         <td> <%= resultado.get(i).getNombre()%>  </td> 
                         <td> <%= resultado.get(i).getApellido()%>  </td>
-                        <td><a href="../controlador/?accion=ver&id=<%= resultado.get(i).getId()%>"><i class="fas fa-eye fa-1x"></i></td>
-                        <td><a href="../controlador/?accion=modificar&id=<%= resultado.get(i).getId()%>"><i class="fas fa-edit fa-1x"></i></a></td>
-                        <td><a href="../controlador/?accion=eliminar&id=<%= resultado.get(i).getId()%>"><i class="fas fa-eraser fa-1x"></i></a></td>
+                        <td><a href="../controlador/?accion=ver&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eye fa-1x"></i></td>
+                        <td><a href="../controlador/?accion=modificar&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-edit fa-1x"></i></a></td>
+                        <td><a href="../controlador/?accion=eliminar&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eraser fa-1x"></i></a></td>
                     </tr>
-                    <%  }%>
+                    <%  } //endfor
+                    } //endif
+                    else if(_tipo.equals("alumno")){
+                            List<Alumnos> resultado1 = null;
+                            AlumnosDAO alumno = new AlumnosDAO();
+                            resultado1 = alumno.listarAlumnos();
 
+                        for (int i = 0; i < resultado1.size(); i++) {
+                    %>
+                    <tr>
+                        <th scope="row">  <%= resultado1.get(i).getId()%>  </th>
+                        <td><i class="fas fa-user-graduate"></i></td>
+                        <td> <%= resultado1.get(i).getNombre()%>  </td> 
+                        <td> <%= resultado1.get(i).getApellido()%>  </td>
+                        <td><a href="../controlador/?accion=ver&id=<%= resultado1.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eye fa-1x"></i></td>
+                        <td><a href="../controlador/?accion=modificar&id=<%= resultado1.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-edit fa-1x"></i></a></td>
+                        <td><a href="../controlador/?accion=eliminar&id=<%= resultado1.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eraser fa-1x"></i></a></td>
+                    </tr>
+                    <%  } //endfor
+                    } // end else if
+                    else {
+                                out.println("no se selecciono ninguna lista valida.");
+                    }
+                    %>
                 </tbody>
             </table>
 

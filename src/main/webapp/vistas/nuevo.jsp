@@ -5,11 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String _tipo = request.getParameter("accion"); %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Nuevo Alumno</title>
+        <title>Nuevo <%= _tipo %></title>
         <link rel="stylesheet" href="../css/estilos.css" >
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><!-- comment -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -20,7 +22,7 @@
     <body>
         <%@ include file="../common-html/menu.jsp" %>
         <div class="container">
-            <h1>Nuevo Alumno:</h1>
+            <h1>Nuevo <%= _tipo %>:</h1>
 
             <form action="../controlador/?accion=insertar" method="post">
                 <div class="mb-3">

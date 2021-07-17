@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Proyecto Final CodoaCodo Java</title>
+        <title>Universidad de Java</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><!-- comment -->
         <link rel="stylesheet" href="css/estilos.css" >
@@ -19,38 +19,44 @@
     <body>
         <%@ include file="./common-html/menu.jsp" %>
         <div class="container">
-            <h1 class="text-center">Proyecto Final Codo a Codo Java</h1>
+            <h1 class="text-center">Universidad de Java</h1>
 
-            <div class="flex grid">
+            <section class="flex grid">
                 <div class="card">
                     <h3>Campus</h3>
                     <img src="./images/campus_2.jpg" alt="campus"/>
+                    <p class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
 
                 <div class="card">
                     <h3>Biblioteca</h3>
                     <img src="./images/biblioteca.jpg" alt="campus"/>
+                    <p class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
 
                 <div class="card">
                     <h3>Campus</h3>
                     <img src="./images/campus.jpg" alt="campus"/>
+                    <p class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
-                 <div class="card">
+                <div class="card">
                     <h3>Egresados</h3>
                     <img src="./images/egresados.jpg" alt="Egresados"/>
+                    <p class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
 
                 <div class="card">
                     <h3>Deportes</h3>
                     <img src="./images/sports.jpg" alt="Deportes"/>
+                    <p class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
 
                 <div class="card">
                     <h3>Restaurante</h3>
                     <img src="./images/restaurant.jpg" alt="Restaurante"/>
+                    <p class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>               
-            </div>
+            </section>
         </div>
         <%@ include file="./common-html/footer.jsp" %>
     </body>

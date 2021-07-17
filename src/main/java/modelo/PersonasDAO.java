@@ -11,25 +11,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Profesores;
+import modelo.Personas;
 
 /**
  *
  * @author Agustin
  */
-public class ProfesoresDAO {
+public class PersonasDAO {
 
     Connection c;
 
-    public ProfesoresDAO() {
+    public PersonasDAO() {
         Conexion conn = new Conexion();
         c = conn.getConnection();
     }
 
-    public List<Profesores> listarProfesores() {
+    public List<Personas> listarProfesores() {
         PreparedStatement ps;
         ResultSet rs;
-        List<Profesores> lista = new ArrayList<>();
+        List<Personas> lista = new ArrayList<>();
         try{
             ps = c.prepareStatement("SELECT * FROM codoacodo.profesores");
             rs = ps.executeQuery();
@@ -41,7 +41,7 @@ public class ProfesoresDAO {
                 String anyo = rs.getString("anyo");
                 String carrera = rs.getString("carrera");
                 String telefono = rs.getString("telefono");                 
-                Profesores a = new Profesores(id, nombre, apellido, email, anyo, carrera, telefono);
+                Personas a = new Personas(id, nombre, apellido, email, anyo, carrera, telefono);
                 lista.add(a);
             }
             return lista;
@@ -52,10 +52,10 @@ public class ProfesoresDAO {
         }
     }
     
-    public Profesores mostrarProfesor(int _id){
+    public Personas mostrarProfesor(int _id){
         PreparedStatement ps;
         ResultSet rs;
-        Profesores profesor = null;
+        Personas profesor = null;
         
         try{
             ps = c.prepareStatement("SELECT * FROM profesores WHERE id = ?");
@@ -69,7 +69,7 @@ public class ProfesoresDAO {
                 String anyo = rs.getString("anyo");
                 String carrera = rs.getString("carrera");
                 String telefono = rs.getString("telefono");                 
-                profesor = new Profesores(id, nombre, apellido, email, anyo, carrera, telefono);
+                profesor = new Personas(id, nombre, apellido, email, anyo, carrera, telefono);
             }
             return profesor;
         }
@@ -107,7 +107,7 @@ public class ProfesoresDAO {
         return b;
     }
     
-    public boolean actualizarProfesor(Profesores profesor){
+    public boolean actualizarProfesor(Personas profesor){
         PreparedStatement ps;
         Boolean b = false;
      

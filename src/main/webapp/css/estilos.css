@@ -47,8 +47,13 @@ table{
     width:90%;
 }
 
+table a{
+    color: var(--grisoscuro);
+}
+
 h1{
     text-align: center;
+    margin-top: 20px;
 }
 #menubar{
     position:relative;
@@ -61,6 +66,18 @@ h1{
 
 #logo{
     height:50px;
+}
+
+.inclinado{
+    position: relative;
+    height:40px;
+    bottom: 30px;
+    z-index: -1;
+    background-color: var(--grisoscuro);
+    transform: skewY(-0.5deg);
+    -webkit-transform: skewY(-0.5deg);
+    -moz-transform: skewY(-0.5deg);
+    -ms-transform: skewY(-0.5deg);
 }
 
 .flex{
@@ -81,7 +98,7 @@ h1{
 
 .card{
   background-color: #fff;
-  color: #333;
+  color: var(--grisoscuro);
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   padding: 10px;
@@ -89,10 +106,20 @@ h1{
   min-height:300px;
 }
 
+.card img{
+    max-height: 180px;
+    overflow:hidden;
+}
+.altura{
+    min-height: calc(100vh - 80px - 80px);
+}
+
 #footer{
     position:relative;
+    bottom:0;
+    margin-bottom: 0px;
     clear: both;
-    height: 200px;
+    height: 80px;
     background-color: var(--grisoscuro);
     width:100%;
     color: #ffffff;

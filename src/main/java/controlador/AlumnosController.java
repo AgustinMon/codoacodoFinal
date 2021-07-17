@@ -156,7 +156,7 @@ public class AlumnosController extends HttpServlet {
             System.out.println(tipo);
         }
 
-        dispatcher = request.getRequestDispatcher("/vistas/alumnos.jsp");
+        dispatcher = request.getRequestDispatcher("/vistas/listar.jsp");
         dispatcher.forward(request, response);
     }
 
