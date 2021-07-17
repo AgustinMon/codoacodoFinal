@@ -26,12 +26,12 @@ public class PersonasDAO {
         c = conn.getConnection();
     }
 
-    public List<Personas> listarProfesores() {
+    public List<Personas> listarPersonas(String _tipo) {
         PreparedStatement ps;
         ResultSet rs;
         List<Personas> lista = new ArrayList<>();
         try{
-            ps = c.prepareStatement("SELECT * FROM codoacodo.profesores");
+            ps = c.prepareStatement("SELECT * FROM codoacodo.personas WHERE `tipo` = '" + _tipo + "';");
             rs = ps.executeQuery();
             while(rs.next()){
                 int id = rs.getInt("id");
@@ -40,8 +40,9 @@ public class PersonasDAO {
                 String email = rs.getString("email");
                 String anyo = rs.getString("anyo");
                 String carrera = rs.getString("carrera");
-                String telefono = rs.getString("telefono");                 
-                Personas a = new Personas(id, nombre, apellido, email, anyo, carrera, telefono);
+                String telefono = rs.getString("telefono");
+                String tipo = rs.getString("tipo");
+                Personas a = new Personas(id, nombre, apellido, email, anyo, carrera, telefono, tipo);
                 lista.add(a);
             }
             return lista;
@@ -52,13 +53,13 @@ public class PersonasDAO {
         }
     }
     
-    public Personas mostrarProfesor(int _id){
+    public Personas mostrarPersonas(int _id){
         PreparedStatement ps;
         ResultSet rs;
         Personas profesor = null;
         
         try{
-            ps = c.prepareStatement("SELECT * FROM profesores WHERE id = ?");
+            ps = c.prepareStatement("SELECT * FROM personas WHERE id = ?");
             ps.setInt(1, _id);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -68,8 +69,9 @@ public class PersonasDAO {
                 String email = rs.getString("email");
                 String anyo = rs.getString("anyo");
                 String carrera = rs.getString("carrera");
-                String telefono = rs.getString("telefono");                 
-                profesor = new Personas(id, nombre, apellido, email, anyo, carrera, telefono);
+                String telefono = rs.getString("telefono");
+                String tipo = rs.getString("tipo");
+                profesor = new Personas(id, nombre, apellido, email, anyo, carrera, telefono, tipo);
             }
             return profesor;
         }
@@ -79,19 +81,20 @@ public class PersonasDAO {
         }
     }
     
-    public boolean insertarProfesor(Alumnos alumno){
+    public boolean insertarPersona(Personas persona){
         PreparedStatement ps;
         Boolean b = false;
      
         try{
-            ps = c.prepareStatement("INSERT INTO profesores (id, nombre, apellido, email, carrera, anyo, telefono)"
-                    + " VALUES (NULL,?,?,?,?,?,?);");
-            ps.setString(1, alumno.getNombre());
-            ps.setString(2, alumno.getApellido());
-            ps.setString(3, alumno.getEmail());
-            ps.setInt(4, Integer.parseInt(alumno.getAnyo()));
-            ps.setString(5, alumno.getCarrera());
-            ps.setString(6, alumno.getTelefono());              
+            ps = c.prepareStatement("INSERT INTO personas (id, nombre, apellido, tipo, carrera, anyo, telefono, email)"
+                    + " VALUES (NULL,?,?,?,?,?,?,?);");
+            ps.setString(1, persona.getNombre());
+            ps.setString(2, persona.getApellido());
+            ps.setString(3, persona.getTipo()); 
+            ps.setString(5, persona.getCarrera());
+            ps.setInt(4, Integer.parseInt(persona.getAnyo()));
+            ps.setString(6, persona.getTelefono());
+            ps.setString(7, persona.getEmail());
             if(ps.execute()){
                b = true; 
             }
@@ -107,22 +110,22 @@ public class PersonasDAO {
         return b;
     }
     
-    public boolean actualizarProfesor(Personas profesor){
+    public boolean actualizarPersona(Personas persona){
         PreparedStatement ps;
         Boolean b = false;
      
         try{
-            ps = c.prepareStatement("UPDATE `profesores` SET `nombre` = ?,"
+            ps = c.prepareStatement("UPDATE `personas` SET `nombre` = ?,"
                     + " `apellido` = ?, `email` = ? "
                     + " `anyo` = ?, `carrera` = ?, `telefono` = ? "
                     + " WHERE `id` = ?;");
-            ps.setString(1, profesor.getNombre());
-            ps.setString(2, profesor.getApellido());
-            ps.setString(3, profesor.getEmail());
-            ps.setInt(4, Integer.parseInt(profesor.getAnyo()));
-            ps.setString(5, profesor.getCarrera());
-            ps.setString(6, profesor.getTelefono());            
-            ps.setInt(4, profesor.getId());
+            ps.setString(1, persona.getNombre());
+            ps.setString(2, persona.getApellido());
+            ps.setString(3, persona.getEmail());
+            ps.setInt(4, Integer.parseInt(persona.getAnyo()));
+            ps.setString(5, persona.getCarrera());
+            ps.setString(6, persona.getTelefono());            
+            ps.setInt(4, persona.getId());
             if(ps.execute()){
                b = true; 
             }
@@ -138,12 +141,12 @@ public class PersonasDAO {
         return b;
     }
     
-    public boolean borrarProfesor(int _id){
+    public boolean borrarPersona(int _id){
         PreparedStatement ps;
         Boolean b = false;
      
         try{
-            ps = c.prepareStatement("DELETE FROM profesores WHERE id = ?;");
+            ps = c.prepareStatement("DELETE FROM personas WHERE id = ?;");
             ps.setInt(1, _id);
             if(ps.execute()){
                b = true; 

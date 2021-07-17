@@ -10,8 +10,8 @@ import java.io.PrintWriter;
 import static java.lang.System.out;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-import modelo.Alumnos;
-import modelo.AlumnosDAO;
+import modelo.Personas;
+import modelo.PersonasDAO;
 
 /**
  *
@@ -64,7 +64,7 @@ public class AlumnosController extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             processRequest(request, response);
-            AlumnosDAO alumnosdao = new AlumnosDAO();
+            PersonasDAO personasdao = new PersonasDAO();
             String accion;
             RequestDispatcher dispatcher = null;
             accion = request.getParameter("accion");
@@ -72,7 +72,7 @@ public class AlumnosController extends HttpServlet {
 
                 if (accion.equals("modificar")) {
                     String id = request.getParameter("id");
-                    alumnosdao.mostrarAlumno(Integer.parseInt(id));
+                    personasdao.mostrarPersonas(Integer.parseInt(id));
                     dispatcher = request.getRequestDispatcher("/vistas/modificar.jsp?accion=modificar&id=" + id);
                     dispatcher.forward(request, response);
                 } else if (accion.equals("nuevo")) {
@@ -80,12 +80,12 @@ public class AlumnosController extends HttpServlet {
                     dispatcher.forward(request, response);
                 } else if (accion.equals("ver")) {
                     String id = request.getParameter("id");
-                    alumnosdao.mostrarAlumno(Integer.parseInt(id));
+                    personasdao.mostrarPersonas(Integer.parseInt(id));
                     dispatcher = request.getRequestDispatcher("/vistas/modificar.jsp?accion=ver&id=" + id);
                     dispatcher.forward(request, response);
                 } else if (accion.equals("eliminar")) {
                     String id = request.getParameter("id");
-                    alumnosdao.mostrarAlumno(Integer.parseInt(id));
+                    personasdao.mostrarPersonas(Integer.parseInt(id));
                     dispatcher = request.getRequestDispatcher("/vistas/eliminar.jsp?id=" + id);
                     dispatcher.forward(request, response);
                 } else if (accion.equals("listar")) {
@@ -122,38 +122,54 @@ public class AlumnosController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-        AlumnosDAO alumnosdao = new AlumnosDAO();
-        String tipo;
+        PersonasDAO personasdao = new PersonasDAO();
+        String accion;
         RequestDispatcher dispatcher = null;
-        tipo = request.getParameter("tipo");
-        if (tipo.equals("eliminar")) {
+        accion = request.getParameter("accion");
+        if (accion.equals("eliminado")) {
             String id = request.getParameter("id");
-            alumnosdao.borrarAlumno(Integer.parseInt(id));
-        } else if (tipo.equals("modificar")) {
-            String id = request.getParameter("id");
+            personasdao.borrarPersona(Integer.parseInt(id));
+        } else if (accion.equals("modificar")) {
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String email = request.getParameter("email");
+            String tipo = request.getParameter("tipo");
+            String anyo = request.getParameter("anyo");
+            String carrera = request.getParameter("carrera");
+            String telefono = request.getParameter("telefono");
 
-            Alumnos alumno = new Alumnos();
-            alumno.setApellido(apellido);
-            alumno.setEmail(email);
-            alumno.setNombre(nombre);
-            alumno.setId(Integer.parseInt(id));
-            alumnosdao.actualizarAlumno(alumno);
-        } else if (tipo.equals("insertar")) {
+            Personas persona = new Personas();
+            persona.setTipo(tipo);
+            persona.setApellido(apellido);
+            persona.setEmail(email);
+            persona.setNombre(nombre);
+            persona.setId(null);
+            persona.setCarrera(carrera);
+            persona.setTelefono(telefono);
+            persona.setAnyo(anyo);
+            
+            personasdao.actualizarPersona(persona);
+        } else if (accion.equals("insertar")) {
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String email = request.getParameter("email");
-
-            Alumnos alumno = new Alumnos();
-            alumno.setApellido(apellido);
-            alumno.setEmail(email);
-            alumno.setNombre(nombre);
-            alumno.setId(null);
-            alumnosdao.insertarAlumno(alumno);
+            String tipo = request.getParameter("tipo");
+            String anyo = request.getParameter("anyo");
+            String carrera = request.getParameter("carrera");
+            String telefono = request.getParameter("telefono");
+            
+            Personas persona = new Personas();
+            persona.setTipo(tipo);
+            persona.setApellido(apellido);
+            persona.setEmail(email);
+            persona.setNombre(nombre);
+            persona.setId(null);
+            persona.setCarrera(carrera);
+            persona.setTelefono(telefono);
+            persona.setAnyo(anyo);
+            personasdao.insertarPersona(persona);
         } else {
-            System.out.println(tipo);
+            System.out.println("accion no permitida: " + accion);
         }
 
         dispatcher = request.getRequestDispatcher("/vistas/listar.jsp");

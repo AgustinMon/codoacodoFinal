@@ -17,9 +17,10 @@ public class Personas {
     private String anyo;
     private String carrera;
     private String telefono;
+    private String tipo;
     
     //no es publica, esta dentro del ambito de su paquete
-    Personas(int id, String nombre, String apellido, String email, String anyo, String carrera, String telefono){
+    Personas(int id, String nombre, String apellido, String email, String anyo, String carrera, String telefono, String tipo){
         this.id = id;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -27,6 +28,15 @@ public class Personas {
         this.anyo = anyo;
         this.carrera = carrera;
         this.telefono = telefono;
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
     // publica para instanciar desde el controlador

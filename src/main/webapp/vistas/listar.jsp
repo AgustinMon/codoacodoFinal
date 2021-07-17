@@ -4,11 +4,9 @@
     Author     : Agustin
 --%>
 
-<%@page import="modelo.AlumnosDAO"%>
-<%@page import="modelo.ProfesoresDAO"%>
+<%@page import="modelo.PersonasDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="modelo.Alumnos"%>
-<%@page import="modelo.Profesores"%>
+<%@page import="modelo.Personas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <% String _tipo = request.getParameter("tipo"); %>
 <!DOCTYPE html>
@@ -58,16 +56,22 @@
                 </thead>
                 <tbody>
                     <%                            
-                    if(_tipo.equals("profesor")){
-                            List<Profesores> resultado = null;
-                            ProfesoresDAO profesor = new ProfesoresDAO();
-                            resultado = profesor.listarProfesores();
+                    if(_tipo.equals("profesor") || _tipo.equals("alumno")){
+                            List<Personas> resultado = null;
+                            PersonasDAO persona = new PersonasDAO();
+                            resultado = persona.listarPersonas(_tipo);
                     
                         for (int i = 0; i < resultado.size(); i++) {
                     %>
                     <tr>
                         <th scope="row">  <%= resultado.get(i).getId()%>  </th>
-                        <td><i class="fas fa-chalkboard-teacher"></i></td>
+                        
+                        <%  if(_tipo.equals("profesor")){%>    
+                            <td><i class="fas fa-chalkboard-teacher"></i></td>
+                        <% } else if(_tipo.equals("alumno")){%> 
+                            <td><i class="fas fa-user-graduate"></i></td>
+                        <%}%>
+                        
                         <td> <%= resultado.get(i).getNombre()%>  </td> 
                         <td> <%= resultado.get(i).getApellido()%>  </td>
                         <td><a href="../controlador/?accion=ver&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eye fa-1x"></i></td>
@@ -76,24 +80,6 @@
                     </tr>
                     <%  } //endfor
                     } //endif
-                    else if(_tipo.equals("alumno")){
-                            List<Alumnos> resultado1 = null;
-                            AlumnosDAO alumno = new AlumnosDAO();
-                            resultado1 = alumno.listarAlumnos();
-
-                        for (int i = 0; i < resultado1.size(); i++) {
-                    %>
-                    <tr>
-                        <th scope="row">  <%= resultado1.get(i).getId()%>  </th>
-                        <td><i class="fas fa-user-graduate"></i></td>
-                        <td> <%= resultado1.get(i).getNombre()%>  </td> 
-                        <td> <%= resultado1.get(i).getApellido()%>  </td>
-                        <td><a href="../controlador/?accion=ver&id=<%= resultado1.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eye fa-1x"></i></td>
-                        <td><a href="../controlador/?accion=modificar&id=<%= resultado1.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-edit fa-1x"></i></a></td>
-                        <td><a href="../controlador/?accion=eliminar&id=<%= resultado1.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eraser fa-1x"></i></a></td>
-                    </tr>
-                    <%  } //endfor
-                    } // end else if
                     else {
                                 out.println("no se selecciono ninguna lista valida.");
                     }

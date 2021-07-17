@@ -5,7 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% String _tipo = request.getParameter("accion"); %>
+<% String _tipo = request.getParameter("tipo"); %>
+<% String _accion = request.getParameter("accion"); %>
 
 <!DOCTYPE html>
 <html>
@@ -21,13 +22,13 @@
     </head>
     <body>
         <%@ include file="../common-html/menu.jsp" %>
-        <div class="container">
+        <div class="container altura">
             <h1>Nuevo <%= _tipo %>:</h1>
 
             <form action="../controlador/?accion=insertar" method="post">
                 <div class="mb-3">
-                    <input type="hidden" class="form-control" name="tipo" id="tipo" value="insertar"/>
-                    
+                    <input type="hidden" class="form-control" name="accion" id="accion" value="insertar"/>
+                    <input type="hidden" class="form-control" name="tipo" id="tipo" value="<%= _tipo %>"/>
                     <label for="nombre" class="form-label">Nombre:</label>
                     <input required type="text" class="form-control" name="nombre" id="nombre" value=""/>
 
@@ -35,7 +36,7 @@
                     <input required type="text" class="form-control" name="apellido" id="apellido" value=""/>
 
                     <label for="anyo" class="form-label">Año en curso:</label>
-                    <input type="email" class="form-control" name="anyo" id="anyo" value=""/>
+                    <input type="number" class="form-control" name="anyo" id="anyo" value=""/>
 
                     <label for="carrera" class="form-label">Carrera:</label>
                     <input required type="text" class="form-control" name="carrera" id="carrera" value=""/>

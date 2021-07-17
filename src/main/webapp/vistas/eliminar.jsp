@@ -4,15 +4,15 @@
     Author     : Agustin
 --%>
 
-<%@page import="modelo.AlumnosDAO"%>
-<%@page import="modelo.Alumnos"%>
+<%@page import="modelo.PersonasDAO"%>
+<%@page import="modelo.Personas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Eliminar Alumnos</title>
+        <title>Eliminar:</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><!-- comment -->
         <link rel="stylesheet" href="../css/estilos.css" >
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -28,28 +28,29 @@
             int id;
             id = Integer.parseInt(_id);
 
-            Alumnos resultado = null;
-            AlumnosDAO alumno = new AlumnosDAO();
-            resultado = alumno.mostrarAlumno(id);
+            Personas resultado = null;
+            PersonasDAO persona = new PersonasDAO();
+            resultado = persona.mostrarPersonas(id);
+            String _nombre = resultado.getNombre();
+            String _apellido = resultado.getApellido();
+            String _email = resultado.getEmail();
         %>
 
         <div class="container altura">
-            <h1>Eliminar Alumno:</h1>
-            <h2>Atención, se eliminará el siguiente alumno: </h2>
-            <form action="../controlador/?accion=eliminado" method="post">
+            <h1>Eliminar registro:</h1>
+            <h2>Atención, se eliminará el siguiente registro: </h2>
+            <form action="<%= request.getContextPath() %>/controlador/?accion=eliminado&tipo=alumno" method="post">
                 <div class="mb-3">
-                    <input type="hidden" class="form-control" name="id" id="id" value="<% out.print(resultado.getId());%>"/>
-
-                    <input type="hidden" class="form-control" name="tipo" id="tipo" value="eliminar"/>
+                    <input type="hidden" class="form-control" name="id" id="id" value="<%= _id %>"/>
 
                     <label for="email" class="form-label">email:</label>
-                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="<% out.print(resultado.getEmail());%>"/>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="<%= _email %>"/>
 
                     <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" name="nombre" id="nombre" value="<% out.print(resultado.getNombre());%>"/>
+                    <input type="text" class="form-control" name="nombre" id="nombre" value="<%= _nombre %>"/>
 
                     <label for="apellido" class="form-label">Apellido:</label>
-                    <input type="text" class="form-control" name="apellido" id="apellido" value="<% out.print(resultado.getApellido());%>"/>
+                    <input type="text" class="form-control" name="apellido" id="apellido" value="<%= _apellido %>"/>
 
                 </div>
                 <button class="btn btn-danger float-right" type="submit">Confirmar</button>
