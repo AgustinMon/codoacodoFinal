@@ -26,22 +26,24 @@
     <body>
         <%@ include file="../common-html/menu.jsp" %>
         <div class="container altura">
-            <h1>Listado de <%= _tipo %></h1>
+
             <%                            
                     if(_tipo.equals("profesor")){
             %>
-            <a class="btn btn-primary mb-3 float-right" href="?accion=nuevo&tipo=profesor">Añadir profesor</a>
+            <a class="btn btn-primary mb-3 float-right mt-negativo layer-alto btn-lg" href="?accion=nuevo&tipo=profesor">Añadir profesor</a>
             <%
                 } 
             %>
             <%                            
                     if(_tipo.equals("alumno")){
             %>
-            <a class="btn btn-primary mb-3 float-right" href="?accion=nuevo&tipo=alumno">Añadir alumno</a>
+            <a class="btn btn-primary mb-3 float-right mt-negativo layer-alto btn-lg" href="?accion=nuevo&tipo=alumno">Añadir alumno</a>
             <%
                 } 
             %>
 
+            <h1>Listado de <%= _tipo %></h1>
+            
             <table class="table table-hover">
                 <thead>
                     <tr>
