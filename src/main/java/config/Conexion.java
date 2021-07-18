@@ -17,7 +17,7 @@ public class Conexion {
         try{
             String usuario = "codoacodo";
             String pass = "1234";
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/codoacodo", usuario, pass);
         }
         catch (Exception e){

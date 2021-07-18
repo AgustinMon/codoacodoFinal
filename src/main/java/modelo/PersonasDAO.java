@@ -94,8 +94,8 @@ public class PersonasDAO {
             ps.setString(1, persona.getNombre());
             ps.setString(2, persona.getApellido());
             ps.setString(3, persona.getTipo());
-            ps.setString(5, persona.getCarrera());
-            ps.setInt(4, Integer.parseInt(persona.getAnyo()));
+            ps.setString(4, persona.getCarrera());
+            ps.setString(5, persona.getAnyo());
             ps.setString(6, persona.getTelefono());
             ps.setString(7, persona.getEmail());
             if (ps.execute()) {
