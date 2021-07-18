@@ -10,7 +10,8 @@ package modelo;
  * @author Agustin
  */
 public class Personas {
-    private Integer id;
+
+    private String id;
     private String nombre;
     private String apellido;
     private String email;
@@ -18,9 +19,9 @@ public class Personas {
     private String carrera;
     private String telefono;
     private String tipo;
-    
+
     //no es publica, esta dentro del ambito de su paquete
-    Personas(int id, String nombre, String apellido, String email, String anyo, String carrera, String telefono, String tipo){
+    Personas(String id, String nombre, String apellido, String email, String anyo, String carrera, String telefono, String tipo) {
         this.id = id;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -31,6 +32,11 @@ public class Personas {
         this.tipo = tipo;
     }
 
+    // publica para instanciar desde el controlador
+    public Personas() {
+
+    }
+
     public String getTipo() {
         return tipo;
     }
@@ -38,17 +44,12 @@ public class Personas {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-    // publica para instanciar desde el controlador
-    public Personas(){
-        
-    }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -99,6 +100,5 @@ public class Personas {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-   
-    
+
 }

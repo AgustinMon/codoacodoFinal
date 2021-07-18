@@ -90,7 +90,7 @@ public class AlumnosController extends HttpServlet {
                     dispatcher.forward(request, response);
                 } else if (accion.equals("listar")) {
                     String tipo = request.getParameter("tipo");
-                    dispatcher = request.getRequestDispatcher("/vistas/listar.jsp?tipo="+tipo);
+                    dispatcher = request.getRequestDispatcher("/vistas/listar.jsp?tipo=" + tipo);
                     dispatcher.forward(request, response);
                 } //casos como eliminado o modificado
                 else {
@@ -129,7 +129,8 @@ public class AlumnosController extends HttpServlet {
         if (accion.equals("eliminado")) {
             String id = request.getParameter("id");
             personasdao.borrarPersona(Integer.parseInt(id));
-        } else if (accion.equals("modificar")) {
+        } else if (accion.equals("modificado")) {
+            String id = request.getParameter("id");
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String email = request.getParameter("email");
@@ -143,11 +144,11 @@ public class AlumnosController extends HttpServlet {
             persona.setApellido(apellido);
             persona.setEmail(email);
             persona.setNombre(nombre);
-            persona.setId(null);
+            persona.setId(id);
             persona.setCarrera(carrera);
             persona.setTelefono(telefono);
             persona.setAnyo(anyo);
-            
+
             personasdao.actualizarPersona(persona);
         } else if (accion.equals("insertar")) {
             String nombre = request.getParameter("nombre");
@@ -157,7 +158,7 @@ public class AlumnosController extends HttpServlet {
             String anyo = request.getParameter("anyo");
             String carrera = request.getParameter("carrera");
             String telefono = request.getParameter("telefono");
-            
+
             Personas persona = new Personas();
             persona.setTipo(tipo);
             persona.setApellido(apellido);

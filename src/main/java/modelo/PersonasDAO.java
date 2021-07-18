@@ -30,40 +30,44 @@ public class PersonasDAO {
         PreparedStatement ps;
         ResultSet rs;
         List<Personas> lista = new ArrayList<>();
-        try{
-            ps = c.prepareStatement("SELECT * FROM codoacodo.personas WHERE `tipo` = '" + _tipo + "';");
+        try {
+            ps = c.prepareStatement("SELECT * FROM codoacodo.personas WHERE `tipo` = ?;");
+            ps.setString(1, _tipo);
             rs = ps.executeQuery();
-            while(rs.next()){
-                int id = rs.getInt("id");
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
-                String anyo = rs.getString("anyo");
+                Integer anyo = rs.getInt("anyo");
                 String carrera = rs.getString("carrera");
                 String telefono = rs.getString("telefono");
                 String tipo = rs.getString("tipo");
-                Personas a = new Personas(id, nombre, apellido, email, anyo, carrera, telefono, tipo);
-                lista.add(a);
+                try {
+                    Personas a = new Personas(String.valueOf(id), nombre, apellido, email, String.valueOf(anyo), carrera, telefono, tipo);
+                    lista.add(a);
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                }
             }
             return lista;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
             return null;
         }
     }
-    
-    public Personas mostrarPersonas(int _id){
+
+    public Personas mostrarPersonas(int _id) {
         PreparedStatement ps;
         ResultSet rs;
         Personas profesor = null;
-        
-        try{
+
+        try {
             ps = c.prepareStatement("SELECT * FROM personas WHERE id = ?");
             ps.setInt(1, _id);
             rs = ps.executeQuery();
-            while(rs.next()){
-                int id = rs.getInt("id");
+            while (rs.next()) {
+                String id = rs.getString("id");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
@@ -74,92 +78,85 @@ public class PersonasDAO {
                 profesor = new Personas(id, nombre, apellido, email, anyo, carrera, telefono, tipo);
             }
             return profesor;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
             return null;
         }
     }
-    
-    public boolean insertarPersona(Personas persona){
+
+    public boolean insertarPersona(Personas persona) {
         PreparedStatement ps;
         Boolean b = false;
-     
-        try{
+
+        try {
             ps = c.prepareStatement("INSERT INTO personas (id, nombre, apellido, tipo, carrera, anyo, telefono, email)"
                     + " VALUES (NULL,?,?,?,?,?,?,?);");
             ps.setString(1, persona.getNombre());
             ps.setString(2, persona.getApellido());
-            ps.setString(3, persona.getTipo()); 
+            ps.setString(3, persona.getTipo());
             ps.setString(5, persona.getCarrera());
             ps.setInt(4, Integer.parseInt(persona.getAnyo()));
             ps.setString(6, persona.getTelefono());
             ps.setString(7, persona.getEmail());
-            if(ps.execute()){
-               b = true; 
-            }
-            else{
+            if (ps.execute()) {
+                b = true;
+            } else {
                 b = false;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
             b = false;
         }
-        
+
         return b;
     }
-    
-    public boolean actualizarPersona(Personas persona){
+
+    public boolean actualizarPersona(Personas persona) {
         PreparedStatement ps;
         Boolean b = false;
-     
-        try{
+
+        try {
             ps = c.prepareStatement("UPDATE `personas` SET `nombre` = ?,"
-                    + " `apellido` = ?, `email` = ? "
-                    + " `anyo` = ?, `carrera` = ?, `telefono` = ? "
-                    + " WHERE `id` = ?;");
+                    + " `apellido` = ?, `email` = ?, "
+                    + " `telefono` = ? ,`carrera` = ?,`anyo` = ? "
+                    + " WHERE `id` = ? ;");
             ps.setString(1, persona.getNombre());
             ps.setString(2, persona.getApellido());
             ps.setString(3, persona.getEmail());
-            ps.setInt(4, Integer.parseInt(persona.getAnyo()));
+            ps.setString(4, persona.getTelefono());
             ps.setString(5, persona.getCarrera());
-            ps.setString(6, persona.getTelefono());            
-            ps.setInt(4, persona.getId());
-            if(ps.execute()){
-               b = true; 
-            }
-            else{
+            ps.setString(6, persona.getAnyo());
+            ps.setString(7, String.valueOf(persona.getId()));
+            if (ps.execute()) {
+                b = true;
+            } else {
                 b = false;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
             b = false;
         }
-        
+
         return b;
     }
-    
-    public boolean borrarPersona(int _id){
+
+    public boolean borrarPersona(int _id) {
         PreparedStatement ps;
         Boolean b = false;
-     
-        try{
+
+        try {
             ps = c.prepareStatement("DELETE FROM personas WHERE id = ?;");
             ps.setInt(1, _id);
-            if(ps.execute()){
-               b = true; 
-            }
-            else{
+            if (ps.execute()) {
+                b = true;
+            } else {
                 b = false;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
             b = false;
         }
-        
+
         return b;
     }
 }

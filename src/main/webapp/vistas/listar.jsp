@@ -58,8 +58,8 @@
                     <%                            
                     if(_tipo.equals("profesor") || _tipo.equals("alumno")){
                             List<Personas> resultado = null;
-                            PersonasDAO persona = new PersonasDAO();
-                            resultado = persona.listarPersonas(_tipo);
+                            PersonasDAO personadao = new PersonasDAO();
+                            resultado = personadao.listarPersonas(_tipo);
                     
                         for (int i = 0; i < resultado.size(); i++) {
                     %>
