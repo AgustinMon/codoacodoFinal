@@ -85,7 +85,7 @@
                     else {
                                 out.println("no se selecciono ninguna lista valida.");
                     }
-                    %>
+                    %>                       
                 </tbody>
             </table>
 

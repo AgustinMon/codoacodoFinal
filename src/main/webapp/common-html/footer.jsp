@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div id="footer">
+<div id="footer" class="mt-5">
 <nav>
     <ul>
         <li>Proyecto Final Codo a Codo Java</li>
