@@ -7,7 +7,6 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import modelo.Personas;
@@ -93,13 +92,20 @@ public class AlumnosController extends HttpServlet {
                     dispatcher = request.getRequestDispatcher("/vistas/listar.jsp?tipo=" + tipo);
                     dispatcher.forward(request, response);
                 } //casos como eliminado o modificado
-                else {
+                /* else if (accion.equals("login")) {
+                    dispatcher = request.getRequestDispatcher("/index.jsp");
+                    dispatcher.forward(request, response);
+                }*/ else if (accion.equals("logout")) {
+                    //request.getSession().getAttribute("Usuario") = null;
+                    request.getSession().invalidate();
+                    response.sendRedirect(request.getContextPath()+"/index.jsp");
+                } else {
                     dispatcher = request.getRequestDispatcher("/vistas/listar.jsp");
                     dispatcher.forward(request, response);
                 }
 
             } else {
-                dispatcher = request.getRequestDispatcher("/index.html");
+                dispatcher = request.getRequestDispatcher(request.getContextPath());
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
@@ -129,6 +135,8 @@ public class AlumnosController extends HttpServlet {
         if (accion.equals("eliminado")) {
             String id = request.getParameter("id");
             personasdao.borrarPersona(Integer.parseInt(id));
+            dispatcher = request.getRequestDispatcher("/vistas/listar.jsp");
+            dispatcher.forward(request, response);
         } else if (accion.equals("modificado")) {
             String id = request.getParameter("id");
             String nombre = request.getParameter("nombre");
@@ -150,6 +158,8 @@ public class AlumnosController extends HttpServlet {
             persona.setAnyo(anyo);
 
             personasdao.actualizarPersona(persona);
+            dispatcher = request.getRequestDispatcher("/vistas/listar.jsp");
+            dispatcher.forward(request, response);
         } else if (accion.equals("insertar")) {
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
@@ -169,12 +179,23 @@ public class AlumnosController extends HttpServlet {
             persona.setTelefono(telefono);
             persona.setAnyo(anyo);
             personasdao.insertarPersona(persona);
+            dispatcher = request.getRequestDispatcher("/vistas/listar.jsp");
+            dispatcher.forward(request, response);
+        } else if (accion.equals("login")) {
+            String login = request.getParameter("usuario");
+            String clave = request.getParameter("password");
+            if (login.equals("admin") && clave.equals("admin")) {
+                HttpSession sesion = request.getSession();
+                sesion.setAttribute("Usuario", login);
+
+            }
+            response.sendRedirect(request.getContextPath()+"/index.jsp");
+            //dispatcher = request.getRequestDispatcher("/index.jsp");
+            //dispatcher.forward(request, response);
         } else {
             System.out.println("accion no permitida: " + accion);
         }
 
-        dispatcher = request.getRequestDispatcher("/vistas/listar.jsp");
-        dispatcher.forward(request, response);
     }
 
     /**

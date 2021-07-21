@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Universidad de Java</title>
+        <title>Ejercicio final integrador de Java</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><!-- comment -->
         <link rel="stylesheet" href="css/estilos.css" >
@@ -19,8 +19,8 @@
     <body>
         <%@ include file="./common-html/menu.jsp" %>
         <div class="container">
-            <h1 class="text-center">Universidad de Java</h1>
-
+            <h1 class="text-center">Ejercicio final integrador de Java</h1>
+            <h2 class="text-center">Universidad de Java</h2>
             <section class="flex grid">
                 <div class="card">
                     <h3>Campus</h3>

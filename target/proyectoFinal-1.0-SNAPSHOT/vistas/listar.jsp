@@ -57,33 +57,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%                            
-                    if(_tipo.equals("profesor") || _tipo.equals("alumno")){
-                            List<Personas> resultado = null;
-                            PersonasDAO personadao = new PersonasDAO();
-                            resultado = personadao.listarPersonas(_tipo);
+                    <%
+                    if (session.getAttribute("Usuario") != null)
+                    {
                     
-                        for (int i = 0; i < resultado.size(); i++) {
-                    %>
-                    <tr>
-                        <th scope="row">  <%= resultado.get(i).getId()%>  </th>
-                        
-                        <%  if(_tipo.equals("profesor")){%>    
-                            <td><i class="fas fa-chalkboard-teacher"></i></td>
-                        <% } else if(_tipo.equals("alumno")){%> 
-                            <td><i class="fas fa-user-graduate"></i></td>
-                        <%}%>
-                        
-                        <td> <%= resultado.get(i).getNombre()%>  </td> 
-                        <td> <%= resultado.get(i).getApellido()%>  </td>
-                        <td><a href="../controlador/?accion=ver&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eye fa-1x"></i></td>
-                        <td><a href="../controlador/?accion=modificar&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-edit fa-1x"></i></a></td>
-                        <td><a href="../controlador/?accion=eliminar&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eraser fa-1x"></i></a></td>
-                    </tr>
-                    <%  } //endfor
-                    } //endif
-                    else {
-                                out.println("no se selecciono ninguna lista valida.");
+                        if(_tipo.equals("profesor") || _tipo.equals("alumno")){
+                                List<Personas> resultado = null;
+                                    PersonasDAO personadao = new PersonasDAO();
+                                    resultado = personadao.listarPersonas(_tipo);
+                                if(resultado != null && resultado.size()>0){
+                                   for (int i = 0; i < resultado.size(); i++) {
+                                    %>
+                                    <tr>
+                                        <th scope="row">  <%= resultado.get(i).getId()%>  </th>
+
+                                        <%  if(_tipo.equals("profesor")){%>    
+                                            <td><i class="fas fa-chalkboard-teacher"></i></td>
+                                        <% } else if(_tipo.equals("alumno")){%> 
+                                            <td><i class="fas fa-user-graduate"></i></td>
+                                        <%}%>
+
+                                        <td> <%= resultado.get(i).getNombre()%>  </td> 
+                                        <td> <%= resultado.get(i).getApellido()%>  </td>
+                                        <td><a href="../controlador/?accion=ver&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eye fa-1x"></i></td>
+                                        <td><a href="../controlador/?accion=modificar&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-edit fa-1x"></i></a></td>
+                                        <td><a href="../controlador/?accion=eliminar&id=<%= resultado.get(i).getId()%>&tipo=<%= _tipo %>"><i class="fas fa-eraser fa-1x"></i></a></td>
+                                    </tr>
+                                   <%  } //endfor
+                            } //endif reultado > 0
+                            else{
+                                    out.println("no hay resultados.");
+                            }
+                        } //endif
+                        else {
+                                    out.println("no se selecciono ninguna lista valida.");
+                        }
+                    }
+                    else{
+                        out.println("Debe estar logueado para ver los resultados.");
                     }
                     %>                       
                 </tbody>
